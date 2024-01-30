@@ -1,12 +1,11 @@
-from string import ascii_uppercase
-import re
+f = open("/home/user/Загрузки/24_10105.txt").readline()
 
-file = open("/home/user/Загрузки/24_10105.txt", "r").read()
+idxs = [i for i in range(len(f)) if f[i] == "T"]
 
-delim = "|".join([ "U", "V", "W", "X", "Y",  "Z"])
+mx = 0
 
-tokens = re.split(delim, file)
+for i in range(len(idxs)-101):
+    if idxs[i+100] - idxs[i] > mx:
+        mx = idxs[i+100] - idxs[i]
 
-tokens = list(filter(lambda x: len(x) >= 100, tokens))
-tokens.sort(key=lambda x: len(x))
-print(len(tokens[-1]))
+print(mx)
